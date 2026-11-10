@@ -1,0 +1,13 @@
+{
+  "name": "voxchat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "No-signup anonymous text chat demo with random matching and safety controls",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
