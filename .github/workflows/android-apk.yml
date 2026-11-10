@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -21,11 +21,12 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Install Android SDK
-        uses: android-actions/setup-android@v3
-
+      # GitHub's hosted Ubuntu runner already has the Android SDK.
+      # Do not invoke setup-android@v3: it tries to install the removed 'tools' package.
       - name: Install Android platform
-        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          sdkmanager --install "platforms;android-35" "build-tools;35.0.0"
 
       - name: Install Gradle
         uses: gradle/actions/setup-gradle@v4
